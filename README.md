@@ -8,6 +8,8 @@ GitHub Pages presentation covering key June 2026 announcements:
 4. Cloud and Local Sandboxes (public preview)
 5. Extend GitHub with Agent Apps
 6. Copilot SDK GA
+7. Copilot CLI (terminal-native dev agent)
+8. Work IQ (M365 Copilot intelligence layer)
 
 ## Presentation
 
@@ -23,3 +25,5 @@ Open `index.html` locally, or use the GitHub Pages URL after publishing:
 - https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/
 - https://github.blog/changelog/2026-06-02-copilot-sdk-is-now-generally-available/
 - https://github.blog/changelog/2026-06-02-extend-github-with-agent-apps/
+- https://github.com/features/copilot/cli
+- https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/
