@@ -10,6 +10,7 @@ GitHub Pages presentation covering key June 2026 announcements:
 6. Copilot SDK GA
 7. Copilot CLI (terminal-native dev agent)
 8. Work IQ (M365 Copilot intelligence layer)
+9. Auto Model Selection (intelligent task routing)
 
 ## Presentation
 
@@ -27,3 +28,4 @@ Open `index.html` locally, or use the GitHub Pages URL after publishing:
 - https://github.blog/changelog/2026-06-02-extend-github-with-agent-apps/
 - https://github.com/features/copilot/cli
 - https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/
+- https://docs.github.com/en/copilot/concepts/models/auto-model-selection
