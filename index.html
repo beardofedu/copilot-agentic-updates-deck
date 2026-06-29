@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Dev Platform Updates — June 2026</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css"
+      id="theme"
+    />
+    <style>
+      :root {
+        --accent: #7ee787;
+      }
+      .reveal h1,
+      .reveal h2 {
+        text-transform: none;
+      }
+      .reveal .accent {
+        color: var(--accent);
+      }
+      .reveal .small {
+        font-size: 0.62em;
+      }
+      .reveal .source {
+        font-size: 0.52em;
+        color: #a1a1aa;
+      }
+      .reveal ul.tight li {
+        margin: 0.28em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>GitHub + AI Platform Updates</h1>
+          <p class="accent">What changed and why it matters</p>
+          <p class="small">June 2026 briefing</p>
+        </section>
+
+        <section>
+          <h2>1. GitHub Copilot App — Full Dev Agent</h2>
+          <ul class="tight">
+            <li>Desktop app drives work from issue to merged PR autonomously.</li>
+            <li>Parallel sessions run on isolated branches for faster throughput.</li>
+            <li>Agent Merge handles review comments and CI fixes automatically.</li>
+            <li>High conference buzz: this is the “full dev workflow” moment.</li>
+          </ul>
+          <p class="source">
+            Source:
+            <a href="https://github.blog/changelog/2026-05-14-github-copilot-app-is-now-available-in-technical-preview/">
+              GitHub Changelog
+            </a>
+          </p>
+        </section>
+
+        <section>
+          <h2>2. Rubber Duck Agent — GA</h2>
+          <ul class="tight">
+            <li>Now generally available in GitHub Copilot CLI.</li>
+            <li>Built as a “second opinion” flow for stronger answers.</li>
+            <li>Combines model families: one orchestrates, another critiques.</li>
+            <li>Net effect: better response quality and reasoning checks.</li>
+          </ul>
+          <p class="source">
+            Source:
+            <a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/">
+              GitHub Blog
+            </a>
+          </p>
+        </section>
+
+        <section>
+          <h2>3. Defender + GitHub Code Security — GA</h2>
+          <ul class="tight">
+            <li>Defender integrates directly with GitHub Code Security.</li>
+            <li>Vulnerabilities are enriched with production signals.</li>
+            <li>Copilot can trigger auto-fix flows from security findings.</li>
+            <li>Purview adds real-time governance over Copilot agent activity.</li>
+          </ul>
+          <p class="source">
+            Source:
+            <a href="https://www.microsoft.com/en-us/security/blog/2026/06/02/microsoft-build-2026-securing-code-agents-and-models-across-the-development-lifecycle/">
+              Microsoft Security Blog
+            </a>
+          </p>
+        </section>
+
+        <section>
+          <h2>4. Cloud + Local Sandboxes — Public Preview</h2>
+          <ul class="tight">
+            <li>Enterprises define policy-driven boundaries for agent access.</li>
+            <li>Enables tighter control over data, tooling, and execution surface.</li>
+            <li>Especially relevant for compliance-heavy and regulated industries.</li>
+          </ul>
+          <p class="source">
+            Source:
+            <a href="https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/">
+              GitHub Blog
+            </a>
+          </p>
+        </section>
+
+        <section>
+          <h2>5. Extend GitHub with Agent Apps</h2>
+          <ul class="tight">
+            <li>Partner-built AI agent apps are now installable from Marketplace.</li>
+            <li>Integrates directly into GitHub workflows and experiences.</li>
+            <li>Creates a broader ecosystem beyond built-in Copilot capabilities.</li>
+          </ul>
+          <p class="source">
+            Source:
+            <a href="https://github.blog/changelog/2026-06-02-extend-github-with-agent-apps/">
+              GitHub Changelog
+            </a>
+          </p>
+        </section>
+
+        <section>
+          <h2>6. Copilot SDK — GA</h2>
+          <ul class="tight">
+            <li>Production-ready API for embedding Copilot’s agentic engine.</li>
+            <li>Targets custom apps, services, and internal developer tooling.</li>
+            <li>
+              Supported stacks: Node.js, Python, Go, .NET, Rust, and Java.
+            </li>
+            <li>Signals a shift from “tool usage” to “platform integration.”</li>
+          </ul>
+          <p class="source">
+            Source:
+            <a href="https://github.blog/changelog/2026-06-02-copilot-sdk-is-now-generally-available/">
+              GitHub Changelog
+            </a>
+          </p>
+        </section>
+
+        <section>
+          <h2>Bottom line</h2>
+          <ul class="tight">
+            <li>Autonomous development workflows are moving into the mainstream.</li>
+            <li>Security, governance, and policy controls are arriving in parallel.</li>
+            <li>The platform is opening: agent apps + SDK expand what teams can build.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        controls: true,
+        progress: true,
+        transition: "slide"
+      });
+    </script>
+  </body>
+</html>
