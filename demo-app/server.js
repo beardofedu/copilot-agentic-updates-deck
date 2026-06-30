@@ -16,6 +16,10 @@ function findProduct(id) {
   return products.find((product) => product.id === id);
 }
 
+function roundCurrency(value) {
+  return Number(value.toFixed(2));
+}
+
 app.get("/api/products", (_req, res) => {
   res.json(products);
 });
@@ -49,26 +53,26 @@ app.post("/api/cart/quote", (req, res) => {
       id: product.id,
       name: product.name,
       quantity,
-      unitPrice: product.price,
-      lineTotal
+      unitPrice: roundCurrency(product.price),
+      lineTotal: roundCurrency(lineTotal)
     });
   }
 
   let discount = 0;
   if (discountCode === "WELCOME10") {
-    // Intentional logic issue for demo: applies 10 currency units, not 10%.
-    discount = 10;
+    discount = subtotal * 0.1;
   }
+  discount = Math.min(discount, subtotal);
 
   const tax = subtotal * 0.0825;
   const total = subtotal - discount + tax;
 
   return res.json({
     lineItems,
-    subtotal,
-    discount,
-    tax,
-    total
+    subtotal: roundCurrency(subtotal),
+    discount: roundCurrency(discount),
+    tax: roundCurrency(tax),
+    total: roundCurrency(total)
   });
 });
 
@@ -92,4 +96,3 @@ app.listen(port, () => {
   const bootId = crypto.randomBytes(4).toString("hex");
   console.log(`TechMart demo app listening on http://localhost:${port} (boot:${bootId})`);
 });
-
