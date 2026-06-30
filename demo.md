@@ -195,6 +195,22 @@ Use the included lightweight app in `demo-app/` as the demo target repository.
 ### Key message
 - Governance is becoming a built-in feature of agentic delivery, not a retrofit.
 
+### Additional context you can speak to (Topic 4)
+
+- **What a sandbox means here:** a controlled execution boundary for Copilot agents (filesystem, network, tools, identity, and secrets), not just a generic isolated VM/container.
+- **Cloud sandbox (high-level):** best for standardized, repeatable workloads where centralized policy enforcement and auditability matter most.
+- **Local sandbox (high-level):** best for tasks requiring local-only assets (private network dependencies, local credentials, specialized hardware/toolchains, or strict data residency constraints).
+- **Policy knobs to call out:**
+  - Tool allow/deny lists (for example: permit `npm test`, block arbitrary package installers)
+  - Network egress policy (public internet blocked, allowlist-only, or internal endpoints only)
+  - Data boundaries (which repos, paths, and secret scopes an agent can access)
+  - Approval gates (human approval before sensitive steps like merge/deploy)
+- **Why leaders care:** this enables security/compliance teams to approve agentic workflows without giving broad, unrestricted access.
+
+### 60-second explainer script (Topic 4)
+
+"Think of sandboxes as runtime guardrails for AI agents. Cloud sandboxes prioritize consistency and centralized control; local sandboxes prioritize proximity to constrained enterprise resources. The key message is not where code runs, but that policy decides what the agent is allowed to do before it acts."
+
 ---
 
 ## 0:39–0:47 — Topic 5: Extend GitHub with Agent Apps
@@ -214,6 +230,27 @@ Use the included lightweight app in `demo-app/` as the demo target repository.
 
 ### Key message
 - Extensibility is no longer optional for enterprise AI platforms; it’s core adoption infrastructure.
+
+### Additional context you can speak to (Topic 5)
+
+- **What Agent Apps are:** installable partner-built AI agents from GitHub Marketplace that participate directly in GitHub workflows.
+- **What they are not:** they are not just static integrations; they add task-specific reasoning/execution inside developer flow (for example: review, triage, compliance, cost analysis).
+- **How to position them:**
+  - Built-in Copilot handles broad developer tasks
+  - Agent Apps provide domain depth for specialized use cases
+  - Together they form a composable agent ecosystem
+- **Enterprise buying lens:** Agent Apps reduce time-to-value because teams can adopt prebuilt domain expertise instead of building every agent capability in-house.
+- **Governance angle:** evaluate each app for permissions, data handling boundaries, auditability, and fallback behavior when the app is unavailable.
+
+### Practical examples to mention (Topic 5)
+
+- **Dependency risk triage app:** flags high-risk upgrades and suggests safer rollout sequencing.
+- **Compliance review app:** checks PRs against internal policy controls and required evidence artifacts.
+- **Cloud cost app:** annotates infra changes with estimated spend impact before merge.
+
+### 60-second explainer script (Topic 5)
+
+"Agent Apps are like adding specialist teammates into GitHub. Copilot gives you broad capability, while Agent Apps add deep domain expertise where teams need precision. The strategic value is composability: you can assemble a workflow using first-party and partner agents without building every capability from scratch."
 
 ---
 
