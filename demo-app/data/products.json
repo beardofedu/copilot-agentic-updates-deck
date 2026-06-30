@@ -1,0 +1,31 @@
+[
+  {
+    "id": "p1001",
+    "name": "Agentic Notebook",
+    "price": 24.99,
+    "category": "stationery",
+    "inventory": 52
+  },
+  {
+    "id": "p1002",
+    "name": "Copilot Hoodie",
+    "price": 64.99,
+    "category": "apparel",
+    "inventory": 8
+  },
+  {
+    "id": "p1003",
+    "name": "Security Sticker Pack",
+    "price": 9.99,
+    "category": "swag",
+    "inventory": 120
+  },
+  {
+    "id": "p1004",
+    "name": "Sandbox Mug",
+    "price": 17.5,
+    "category": "swag",
+    "inventory": 34
+  }
+]
+

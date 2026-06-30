@@ -63,6 +63,39 @@ By the end of this demo, attendees should understand:
 
 ---
 
+## Companion application and issue backlog
+
+Use the included lightweight app in `demo-app/` as the demo target repository.
+
+### App quick reference
+
+- UI: `demo-app/public/index.html`
+- Frontend behavior: `demo-app/public/app.js`
+- API service: `demo-app/server.js`
+- Product data: `demo-app/data/products.json`
+
+### API surfaces to reference during demo
+
+- `GET /api/products` and `GET /api/products/:id`
+- `POST /api/cart/quote`
+- `POST /api/password-reset-token`
+- `GET /api/health`
+
+### Created issues mapped to each demo section
+
+| Demo section | App surface | Issue | Presenter action |
+|---|---|---|---|
+| 0:05–0:14 Copilot App | `server.js`, `public/index.html`, `public/app.js` | [#5 Add product search endpoint and UI filter](https://github.com/beardofedu/copilot-agentic-updates-deck/issues/5) | **Assign issue #5 to Copilot in the Copilot App** and let it generate a PR. |
+| 0:05–0:14 Copilot App (parallel branch demo) | `server.js` | [#6 Fix cart discount math in quote endpoint](https://github.com/beardofedu/copilot-agentic-updates-deck/issues/6) | Start a second Copilot App session in parallel to show isolated-branch concurrency. |
+| 0:14–0:22 Rubber Duck Agent | `server.js` | [#7 Critique checkout reliability plan](https://github.com/beardofedu/copilot-agentic-updates-deck/issues/7) | Use issue text as the Copilot CLI Rubber Duck prompt and compare initial vs critiqued output. |
+| 0:22–0:31 Defender + Code Security | `public/app.js` | [#8 Fix reflected XSS in promo banner](https://github.com/beardofedu/copilot-agentic-updates-deck/issues/8) | Use as the primary security remediation story from finding to fix PR. |
+| 0:22–0:31 Defender + Code Security | `server.js` | [#9 Replace weak reset token generator](https://github.com/beardofedu/copilot-agentic-updates-deck/issues/9) | Use as the follow-up remediation to discuss prioritization and MTTR improvements. |
+| 0:31–0:39 Sandboxes | Policy artifact in `demo-app/policies/` | [#10 Define cloud vs local execution policy matrix](https://github.com/beardofedu/copilot-agentic-updates-deck/issues/10) | Walk through policy boundaries and which task types run cloud vs local. |
+| 0:39–0:47 Agent Apps | Integration note in `demo-app/integrations/` | [#11 Evaluate agent app for dependency risk triage](https://github.com/beardofedu/copilot-agentic-updates-deck/issues/11) | Show marketplace-driven extension narrative: install -> integrate -> specialized output. |
+| 0:47–0:55 Copilot SDK | Prototype note in `demo-app/sdk-prototype/` | [#12 Add internal release-notes assistant endpoint](https://github.com/beardofedu/copilot-agentic-updates-deck/issues/12) | Use to explain “embed Copilot into internal developer platforms” strategy. |
+
+---
+
 ## Detailed facilitator script
 
 ## 0:00–0:05 — Opening + framing

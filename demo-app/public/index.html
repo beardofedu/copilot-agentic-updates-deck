@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechMart Mini Demo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>TechMart Mini Demo</h1>
+      <p class="subtitle">Lightweight app for Copilot and agentic workflow demos</p>
+
+      <section class="panel">
+        <h2>Promo Banner (demo only)</h2>
+        <p id="promoText">No promo message</p>
+        <p class="hint">Try <code>?promo=Summer+Sale</code> in the URL.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Products</h2>
+        <button id="loadProducts">Load products</button>
+        <ul id="products"></ul>
+      </section>
+
+      <section class="panel">
+        <h2>Cart quote (demo)</h2>
+        <button id="quoteCart">Get cart quote</button>
+        <pre id="quoteResult">No quote yet</pre>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
+
