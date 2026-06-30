@@ -3,9 +3,7 @@ function getQueryParam(name) {
   return params.get(name);
 }
 
-async function loadProducts() {
-  const response = await fetch("/api/products");
-  const products = await response.json();
+function renderProducts(products) {
   const list = document.getElementById("products");
   list.innerHTML = "";
 
@@ -14,6 +12,26 @@ async function loadProducts() {
     item.textContent = `${product.name} - $${product.price.toFixed(2)} (${product.inventory} in stock)`;
     list.appendChild(item);
   });
+}
+
+async function fetchAndRenderProducts(url) {
+  const response = await fetch(url);
+  const products = await response.json();
+  renderProducts(products);
+}
+
+async function loadProducts() {
+  await fetchAndRenderProducts("/api/products");
+}
+
+async function searchProducts() {
+  const queryInput = document.getElementById("searchProductsQuery");
+  const query = queryInput.value.trim();
+  const endpoint = query
+    ? `/api/products/search?q=${encodeURIComponent(query)}`
+    : "/api/products";
+
+  await fetchAndRenderProducts(endpoint);
 }
 
 async function quoteCart() {
@@ -44,6 +62,11 @@ function setPromoText() {
 }
 
 document.getElementById("loadProducts").addEventListener("click", loadProducts);
+document.getElementById("searchProducts").addEventListener("click", searchProducts);
+document.getElementById("searchProductsQuery").addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    searchProducts();
+  }
+});
 document.getElementById("quoteCart").addEventListener("click", quoteCart);
 setPromoText();
-
