@@ -1,0 +1,120 @@
+name: Reset Demo State
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'reset'
+        type: choice
+        options:
+          - reset
+          - snapshot
+
+jobs:
+  reset-demo:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up git config
+        run: |
+          git config --global user.email "copilot-demo@github.com"
+          git config --global user.name "Copilot Demo Bot"
+
+      - name: Reset to demo-ready state
+        if: github.event.inputs.action == 'reset'
+        run: |
+          # Get the commit hash at repo initialization (the snapshot point)
+          SNAPSHOT_COMMIT=$(git log --reverse --oneline --grep="Add lightweight demo app" | head -1 | cut -d' ' -f1)
+          
+          if [ -z "$SNAPSHOT_COMMIT" ]; then
+            echo "Could not find snapshot commit. Using current main as reference."
+            SNAPSHOT_COMMIT=$(git rev-parse HEAD)
+          fi
+          
+          echo "Resetting to snapshot commit: $SNAPSHOT_COMMIT"
+          
+          # Reset working directory to snapshot point (undoes all code changes)
+          git reset --hard "$SNAPSHOT_COMMIT"
+          
+          # Force push to main to discard any committed demo changes
+          git push origin main --force-with-lease
+
+      - name: Close demo-created pull requests
+        if: github.event.inputs.action == 'reset'
+        run: |
+          # Close any open PRs created after the demo started
+          # (PRs are typically created by Copilot App during the demo)
+          prs=$(gh pr list --state open --search "created:>2026-06-29" --json number,title --jq '.[].number')
+          
+          for pr in $prs; do
+            echo "Closing PR #$pr"
+            gh pr close "$pr" --comment "Demo reset: closing PR created during test run."
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Reset demo issues to open state
+        if: github.event.inputs.action == 'reset'
+        run: |
+          # Demo issues: #5-#12
+          for issue in 5 6 7 8 9 10 11 12; do
+            state=$(gh issue view "$issue" --json state --jq '.state')
+            
+            if [ "$state" = "CLOSED" ]; then
+              echo "Reopening issue #$issue"
+              gh issue reopen "$issue" --comment "Demo reset: reopening for next run."
+            fi
+            
+            # Unassign any assignees (in case Copilot App assigned them)
+            gh issue edit "$issue" --remove-assignee @me 2>/dev/null || true
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create snapshot metadata
+        if: github.event.inputs.action == 'snapshot'
+        run: |
+          # Store snapshot info for reference
+          SNAPSHOT_COMMIT=$(git rev-parse HEAD)
+          SNAPSHOT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          
+          cat > .github/demo-snapshot.json <<EOF
+          {
+            "snapshot_commit": "$SNAPSHOT_COMMIT",
+            "snapshot_date": "$SNAPSHOT_DATE",
+            "demo_issues": [5, 6, 7, 8, 9, 10, 11, 12],
+            "demo_app_path": "demo-app",
+            "instructions": "Run 'gh workflow run reset-demo.yml -f action=reset' to reset to this state."
+          }
+          EOF
+          
+          echo "Snapshot created at $SNAPSHOT_COMMIT"
+          cat .github/demo-snapshot.json
+          
+          git add .github/demo-snapshot.json
+          git commit -m "chore: snapshot demo state at $SNAPSHOT_COMMIT" || true
+          git push origin main || true
+
+      - name: Summary
+        if: github.event.inputs.action == 'reset'
+        run: |
+          echo "✅ Demo reset complete!"
+          echo ""
+          echo "Reset actions performed:"
+          echo "  • Code reset to snapshot commit"
+          echo "  • Demo PRs closed"
+          echo "  • Issues #5-#12 reopened and unassigned"
+          echo ""
+          echo "Demo app is ready at: demo-app/"
+          echo "To run: cd demo-app && npm install && npm start"
