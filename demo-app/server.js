@@ -73,14 +73,20 @@ app.post("/api/cart/quote", (req, res) => {
 });
 
 app.post("/api/password-reset-token", (req, res) => {
-  const email = req.body.email || "";
+  const email = typeof req.body?.email === "string" ? req.body.email.trim() : "";
   if (!email) {
-    return res.status(400).json({ error: "email is required" });
+    return res.status(400).json({ error: "A valid email is required to generate a reset token" });
   }
 
-  // Intentional weakness for security demo issue.
-  const token = Math.random().toString(36).slice(2);
-  return res.json({ email, token });
+  const expiresInSeconds = 15 * 60;
+  const expiresAt = new Date(Date.now() + expiresInSeconds * 1000).toISOString();
+
+  try {
+    const token = crypto.randomBytes(32).toString("hex");
+    return res.json({ email, token, expiresAt, expiresInSeconds });
+  } catch (_error) {
+    return res.status(500).json({ error: "Unable to generate password reset token" });
+  }
 });
 
 app.get("/api/health", (_req, res) => {
@@ -92,4 +98,3 @@ app.listen(port, () => {
   const bootId = crypto.randomBytes(4).toString("hex");
   console.log(`TechMart demo app listening on http://localhost:${port} (boot:${bootId})`);
 });
-
