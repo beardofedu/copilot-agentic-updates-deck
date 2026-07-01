@@ -5,10 +5,10 @@
   "description": "Lightweight app used for Copilot and agentic workflow demonstrations",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "express": "^4.21.2"
   }
 }
-
