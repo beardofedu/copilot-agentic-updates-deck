@@ -93,8 +93,12 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok" });
 });
 
-app.listen(port, () => {
-  // Intentional for sandbox/agent app demo: static log output for pipeline parse examples.
-  const bootId = crypto.randomBytes(4).toString("hex");
-  console.log(`TechMart demo app listening on http://localhost:${port} (boot:${bootId})`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    // Intentional for sandbox/agent app demo: static log output for pipeline parse examples.
+    const bootId = crypto.randomBytes(4).toString("hex");
+    console.log(`TechMart demo app listening on http://localhost:${port} (boot:${bootId})`);
+  });
+}
+
+module.exports = app;
