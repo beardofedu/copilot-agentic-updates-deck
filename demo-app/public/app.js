@@ -1,3 +1,6 @@
+// Maximum length for promo text to prevent DOM saturation attacks
+const MAX_PROMO_LENGTH = 256;
+
 function getQueryParam(name) {
   const params = new URLSearchParams(window.location.search);
   return params.get(name);
@@ -39,8 +42,11 @@ function setPromoText() {
     return;
   }
 
-  // Intentional for security demo issue: this should be textContent instead.
-  document.getElementById("promoText").innerHTML = promo;
+  // Security fix: use textContent instead of innerHTML to prevent reflected XSS
+  // textContent safely treats input as plain text, not HTML
+  // Truncate to MAX_PROMO_LENGTH to prevent DOM saturation attacks
+  const truncatedPromo = promo.substring(0, MAX_PROMO_LENGTH);
+  document.getElementById("promoText").textContent = truncatedPromo;
 }
 
 document.getElementById("loadProducts").addEventListener("click", loadProducts);
