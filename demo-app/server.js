@@ -16,8 +16,26 @@ function findProduct(id) {
   return products.find((product) => product.id === id);
 }
 
+function searchProducts(term) {
+  const normalizedTerm = term.trim().toLowerCase();
+  if (!normalizedTerm) {
+    return products;
+  }
+
+  return products.filter((product) => {
+    const normalizedName = product.name.toLowerCase();
+    const normalizedId = product.id.toLowerCase();
+    return normalizedName.includes(normalizedTerm) || normalizedId.includes(normalizedTerm);
+  });
+}
+
 app.get("/api/products", (_req, res) => {
   res.json(products);
+});
+
+app.get("/api/products/search", (req, res) => {
+  const query = typeof req.query.q === "string" ? req.query.q : "";
+  return res.json(searchProducts(query));
 });
 
 app.get("/api/products/:id", (req, res) => {
@@ -92,4 +110,3 @@ app.listen(port, () => {
   const bootId = crypto.randomBytes(4).toString("hex");
   console.log(`TechMart demo app listening on http://localhost:${port} (boot:${bootId})`);
 });
-
