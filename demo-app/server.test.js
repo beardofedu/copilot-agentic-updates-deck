@@ -73,25 +73,20 @@ test("generates a unique token on each request", async () => {
   });
 });
 
-test("returns 500 when secure token generation fails", async () => {
-  const originalRandomBytes = crypto.randomBytes;
-  crypto.randomBytes = () => {
+test("returns 500 when secure token generation fails", async (t) => {
+  t.mock.method(crypto, "randomBytes", () => {
     throw new Error("entropy source unavailable");
-  };
-
-  try {
-    await withServer(async (baseUrl) => {
-      const response = await fetch(`${baseUrl}/api/password-reset-token`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: "user@example.com" })
-      });
-      const body = await response.json();
-
-      assert.equal(response.status, 500);
-      assert.equal(body.error, "Unable to generate password reset token");
     });
-  } finally {
-    crypto.randomBytes = originalRandomBytes;
-  }
+
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/password-reset-token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "user@example.com" })
+    });
+    const body = await response.json();
+
+    assert.equal(response.status, 500);
+    assert.equal(body.error, "Unable to generate password reset token");
+  });
 });
