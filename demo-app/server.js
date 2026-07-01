@@ -17,7 +17,8 @@ function findProduct(id) {
 }
 
 function roundCurrency(value) {
-  return Number(value.toFixed(2));
+  const n = Number(value);
+  return Number.isFinite(n) ? n.toFixed(2) : "0.00";
 }
 
 app.get("/api/products", (_req, res) => {
